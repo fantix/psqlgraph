@@ -62,3 +62,6 @@ target/
 # IDEs
 .idea/
 *.swp
+
+# pyenv
+.python-version

@@ -13,6 +13,15 @@ before_script:
   - "export JAVA_OPTS=-Xmx512m"
   - echo -e 'Host github.com\n\tStrictHostKeyChecking no\n' >> ~/.ssh/config
   - pip uninstall --yes psqlgraph || true
-  - yes | python setup.py install
-  - cd test; python setup_test_psqlgraph.py
-script: "cd test; py.test -v"
+  - pip install pipenv
+  - pipenv install --dev
+  - pipenv run python test/setup_test_psqlgraph.py
+script: "pipenv run py.test -v test"
+deploy:
+  provider: pypi
+  user: uc-ctds
+  skip_existing: true
+  on:
+    tags: true
+  password:
+    secure: JlnU1KtI+AxyueySfHcIMZbSCfgXl2dSvnyHgBtSF5e4BooJq2V22kzEWS+wF73QYqE2sFsENYoEB3XkGbfIQvSUKC73AbJuygByMRmIFrU7XxrVAP5FR8MJKoED6kWqzrOOLzXXSoehLTgmen5bVUe8BIWD/rynhiEzMODW0FbJwVR4qmFaERfreUsIQS0TJLUdi3C0ygYeEkPXrjIW4po80SVky1Ps/M7gaazpPMkyGAgTbIZq9g44X38jkJP9tQvOMS9SZyHrWeVR0wQdIvSjxexh7rT4jZAHhqBQQzrfk4ZO5IB4qKtnltou8bjRJuGVjWYI2DAWe0/mNBzoUWVcVun+WlhPvSWEdJFX7gmYcieRliFPh+TxnfP4RmHcSWYW+roZnWuqJKlMpUgkexlbaMhdIV+Zj7a1IYN8ZzJBNOKnRQJU+8vZ9NK3LMOIau3us+zoTLN9bQVkxFovDesPSTZXNwnSGR86Am8cfQ7nNsGX/b3J4emLjlpawzzPGU2NeNcBKIFWIn0WIvnX/Cw5ugHdewj0RUg7Beb7ZdI6uTyhyynaZ3ZjyLvrz46knEv1DTf7fkYhf0Na91fxzf2OwgGFcIFlJCmy7oYZiJR4jFuW4wCtiUB/dvCr7+dKLuu7UGVmR7qbjlg4Aawggt0k4NvOCUeBqvrxCONFL5w=
