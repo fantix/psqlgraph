@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    version='1.2.2',
+    version='1.2.3',
     name='psqlgraph',
     packages=["psqlgraph"],
     install_requires=[
@@ -11,6 +11,6 @@ setup(
         'progressbar',
         'avro>=1.7.7, <1.8.0',
         'xlocal>=0.5, <1.0',
-        'requests>=2.5.2, <=2.7.0'
+        'requests>=2.5.2, <3.0.0'
     ]
 )
